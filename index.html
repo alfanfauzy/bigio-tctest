@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Big.io - Technical Test</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <div class="d-flex flex-row justify-content-between my-3 mx-3">
+      <!-- Task 1 -->
+      <div class="flex-grow-1 mx-1">
+        <div class="card border border-primary">
+          <div class="card-header bg-primary text-white">
+            <h5 class="font-weight-light text-center">Test 1</h5>
+          </div>
+          <div class="card-body">
+            <p class="font-weight-light">Masukkan text di bawah ini :</p>
+
+            <input
+              class="form-control"
+              type="text"
+              id="textInput"
+              onkeyup="reverseText()"
+            />
+          </div>
+          <div class="card-footer result-satu text-center font-weight-bold">
+            <h4 class="mt-2 font-weight-normal">Result</h4>
+          </div>
+        </div>
+      </div>
+      <!-- End Task 1 -->
+
+      <!-- Task 2 -->
+      <div class="flex-grow-1 mx-1">
+        <div class="card border border-primary">
+          <div class="card-header bg-primary text-white">
+            <h5 class="font-weight-light text-center">Test 2</h5>
+          </div>
+          <div class="card-body">
+            <p class="font-weight-light">
+              Masukkan hanya angka di field dibawah ini :
+            </p>
+            <div class="form-row">
+              <input
+                class="form-control"
+                type="text"
+                id="numberInput"
+                value=""
+                name="numberInput"
+                onkeydown="javascript: return event.keyCode === 8 || event.keyCode === 46 || event.keyCode === 9 ? true : !isNaN(Number(event.key))"
+              />
+              <button
+                class="mt-2 btn btn-success col-sm-12"
+                onclick="numberTree()"
+              >
+                Generate
+              </button>
+            </div>
+          </div>
+          <div class="card-footer result-dua font-weight-bold">
+            <h4 class="mt-2 font-weight-normal">Result</h4>
+          </div>
+        </div>
+      </div>
+      <!-- End Task 2-->
+
+      <!-- Task 3-->
+      <div class="flex-grow-1 mx-1">
+        <div class="card border border-primary">
+          <div class="card-header bg-primary text-white">
+            <h5 class="font-weight-light text-center">Test 3</h5>
+          </div>
+          <div class="card-body">
+            <p class="font-weight-light">
+              Tekan button <b>Generate</b> untuk melihat hasilnya.
+            </p>
+            <button class="btn btn-success col-sm-12" onclick="butterfly()">
+              Generate
+            </button>
+          </div>
+          <div class="card-footer result-tiga text-center font-weight-normal">
+            <h4 class="mt-2 font-weight-normal">Result</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Task 3-->
+
+    <script>
+      // Task 1 ======================================================
+      function reverseText() {
+        // Mendeklarasikan variabel text dan mengisinya dengan value dari field textInput
+        let text = document.getElementById("textInput").value;
+
+        if (text !== "") {
+          // Mendeklarasikan variabel currentString dan mengisinya dengan value dari variabel text
+          let currentString = text;
+          let newString = "";
+
+          // Melakukan proses looping untuk melakukan proses reverse string
+          // dengan cara mengambil character dari text paling akhir dan dimasukkan kedalam penampung variabel newString
+          for (let i = text.length - 2; i >= 0; i--) {
+            newString = newString + currentString[i];
+          }
+
+          // Menampilkan hasil reverse string ke dalam HTML
+          document.querySelector(
+            ".result-satu"
+          ).innerHTML = `${text}${newString}`;
+        } else {
+          document.querySelector(".result-satu").innerHTML =
+            "<h4 class='mt-2 font-weight-normal'>Result</h4>";
+        }
+      }
+
+      //==============================================================
+
+      // Task 2 ======================================================
+      function numberTree() {
+        // Mendeklarasikan variabel number dan mengisi dengan value dari field numberInput
+        let number = document.getElementById("numberInput").value;
+
+        // Check apakah variabel number tidak kosong
+        if (number !== "") {
+          // Mendeklarasikan variable result sebagai variabel penampung
+          let result = "";
+
+          /* Untuk mencetak looping dan membentuk seperti ini
+          // ***
+          //  **
+          //   *
+          */
+          for (let i = number; i >= 1; i--) {
+            for (let m = i; m <= number; m++) {
+              result += "&nbsp;";
+            }
+            for (let j = i; j >= 1; j--) {
+              result += "*";
+            }
+            result += "<br/>";
+          }
+
+          /* Untuk mencetak looping dan membentuk seperti ini
+          //  **
+          // ***
+          */
+
+          for (let k = 2; k <= number; k++) {
+            for (let n = number; n >= k; n--) {
+              result += "&nbsp;";
+            }
+            for (let l = 1; l <= k; l++) {
+              result += "*";
+            }
+            result += "<br/>";
+          }
+
+          // Menampilkan result kedalam HTML
+          document.querySelector(".result-dua").innerHTML = result;
+        }
+      }
+
+      // ==============================================================
+
+      // Task 3 =======================================================
+      function butterfly() {
+        // Deklarasi Variabel
+        let i, j, k, l, m, n, o, p;
+        let result = "";
+
+        // Deklarasi variabel yang akan di gunakan untuk looping mencetak spasi
+        let space = [7, 5, 3, 1];
+
+        /* Untuk mencetak looping dan membentuk seperti ini
+        // 1       1
+        // 12     21
+        // 123   321
+        // 1234 4321
+        // 123454321
+        */
+        for (i = 0; i < 5; i++) {
+          for (j = 1; j <= i + 1; j++) {
+            result += `${j}`;
+          }
+          for (k = 1; k <= space[i]; k++) {
+            result += "_";
+          }
+          for (l = j - 1; l >= 1; l--) {
+            if (l !== 5) {
+              result += `${l}`;
+            }
+          }
+          result += "<br>";
+        }
+
+        /* Untuk mencetak looping dan membentuk seperti ini
+        // 1234 4321
+        // 123   321
+        // 21     21
+        // 1       1
+        */
+        for (m = 4; m >= 1; m--) {
+          for (n = 1; n <= m; n++) {
+            result += `${n}`;
+          }
+          for (p = 1; p <= space[m - 1]; p++) {
+            result += "_";
+          }
+          for (o = n - 1; o >= 1; o--) {
+            result += `${o}`;
+          }
+          result += "<br>";
+        }
+
+        // Menampilkan result ke dalam HTML
+        document.querySelector(".result-tiga").innerHTML = result;
+      }
+
+      // ==========================================================
+    </script>
+  </body>
+</html>
