@@ -8,8 +8,8 @@
 
 ## 📗 Installation
 ```sh
-$ git clone https://github.com/alfanfauzy/web_surveyor.git
-$ cd bigio
+$ git clone https://github.com/alfanfauzy/bigio-tctest.git
+$ cd bigio-tctest
 $ run index.html in browser
 ```
 
